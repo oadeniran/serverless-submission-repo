@@ -50,7 +50,7 @@ export class ToDoAccess {
             UpdateExpression: 'set #name = :name, #dueDate = :dueDate, #done = :done',
             ExpressionAttributeNames: {
             '#name': 'name',
-            '#duedate': 'dueDate',
+            '#dueDate': 'dueDate',
             '#done': 'done'
             },
             ExpressionAttributeValues: {
