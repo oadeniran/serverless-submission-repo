@@ -4,14 +4,13 @@ import {APIGatewayProxyEvent, APIGatewayProxyResult, APIGatewayProxyHandler} fro
 
 import {getToDosforUser} from "../../helpers/ToDo";
 import { createLogger } from '../../utils/logger';
-import {parseUserId} from "../../auth/utils";
+import {getUserId} from "../utils";
 
 const logger = createLogger('getTodos')
 
 export const handler: APIGatewayProxyHandler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
     // TODO: Get all TODO items for a current user
-    const auth = event.headers.Authorization;
-    const userId = parseUserId(auth.split(' ')[1]);
+    const userId = getUserId(event);
     logger.info(`Get todos for user ${userId}`)
 
     const toDosList = await getToDosforUser(userId);

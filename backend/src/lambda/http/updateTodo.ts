@@ -4,14 +4,13 @@ import {UpdateTodoRequest} from '../../requests/UpdateTodoRequest'
 import {updateToDo} from "../../helpers/ToDo";
 
 import { createLogger } from '../../utils/logger';
-import {parseUserId} from "../../auth/utils";
+import {getUserId} from "../utils";
 
 const logger = createLogger('Updatetodos')
 
 export const handler: APIGatewayProxyHandler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
     // TODO: Update a TODO item with the provided id using values in the "updatedTodo" object
-    const auth = event.headers.Authorization;
-    const userId = parseUserId(auth.split(' ')[1]);
+    const userId = getUserId(event);
     const todoId = event.pathParameters.todoId;
 
     logger.info(`Update todo ${todoId} for user ${userId} `)
